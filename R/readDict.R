@@ -3,12 +3,16 @@
 #' @description Read a dictionary csv file. Convert data fram to HMD class
 #' @param dict.path folder path of dictionary file
 #' @return HMD class object
+#' @examples
+#' 
+#' # dic csv file exists working directory
+#' hmd <- readDict(dict.path='./dic.csv')
 readDict <- function(dict.path, ...){
   
-  ## Description : 
+  ## Description : HMD class를 가지는 Dictionary 생성하는 함수
   #
   ## Arguments
-  # dict.path : 
+  # dict.path : Dictionary로 사용될 csv file이 있는 경로
   
   tmp <- read.table(file=dict.path, sep=',', header=T)
   
@@ -29,11 +33,6 @@ readDict <- function(dict.path, ...){
               return(n);})
   # (3) Set a 'summary' Method
   summary.hmd <- function(object){
-    
-    ## Description :
-    #
-    ## Attributes 
-    # data:
     
     # 단어의 수 
     s1 <- nrow(object@x)
@@ -82,8 +81,8 @@ readDict <- function(dict.path, ...){
   showMethods("coerce", classes = "hmd")
   
   ## Attributes
-  attr(tmp, 'number of level') <- length(tmp)-1
-  attr(tmp, 'number of words') <- nrow(tmp)
+  attr(tmp, 'number of level') <- length(tmp)-1  # HMD에 Dictionary Level의 갯수
+  attr(tmp, 'number of words') <- nrow(tmp)      # HMD에 Dictionary에 있는 단어의 갯수
   
   return(tmp)
   
