@@ -9,6 +9,10 @@
 #' @param stem a logical value indicating whether the character vectors stemming characters.
 #' @param removeN a logical value indicating whether the character vectors remove all numbers.
 #' @export data file
+#' @examples
+#' 
+#' stopwords=c('from','and','for','was','had','ncp','will','its','required','unit','require')
+#' cleanCorpus(VoC.text, stem=T, mystopwords=stopwords)
 cleanCorpus <- function(data, lower=F, removeP=T, removeWS=F, removeSW=F, multipattern=NULL, stem=F, removeN=F){
   
   ## Description  : 데이터를 원하는 방법으로 전처리하여 Corpus형태의 데이터로 반환해주는 함수
@@ -23,6 +27,8 @@ cleanCorpus <- function(data, lower=F, removeP=T, removeWS=F, removeSW=F, multip
   # stem         : (영문에서) 단어에 대한 stemming과정 실행여부
   # removeN      : 숫자 제거여부
   
+  require(tm)
+  require(SnowballC)
   
   cat('Convert Data to Corpus class......')
   if(is.data.frame(data)==TRUE){
@@ -34,7 +40,7 @@ cleanCorpus <- function(data, lower=F, removeP=T, removeWS=F, removeSW=F, multip
   }
   cat('Done\n')
   
-  # 일반적인 데이터 전처리 과정
+  # 텍스트 마이닝의 일반적인 데이터 전처리 과정
   cat('processing 1 : tolower............')
   if(lower==T) { my.corpus <- tm_map(my.corpus, content_transformer(tolower))}               # .....대문자 -> 소문자 변환
   cat('\n')
@@ -51,9 +57,12 @@ cleanCorpus <- function(data, lower=F, removeP=T, removeWS=F, removeSW=F, multip
   if(removeSW==T) { my.corpus <- tm_map(my.corpus, removeWords, stopwords('en'))}     # .....원하는 pattern 제거 
   cat('\n')  
   
+  cat('processing 5 : remove Enter........')
   f <- content_transformer(function(x) {gsub('\n','',x)})
   my.corpus <- tm_map(my.corpus, f)
-  cat('processing 5 : remove multiPattern.......')
+  cat('\n')  
+  
+  cat('processing 6 : remove multiPattern.......')
   mgsub <- function(multi.pattern, replacement,data){
     data <- as.character(data)
     for(i in 1:length(multi.pattern)){
@@ -66,15 +75,18 @@ cleanCorpus <- function(data, lower=F, removeP=T, removeWS=F, removeSW=F, multip
     attr(my.corpus, 'remove.pattern') <- multi.pattern}     # .....원하는 pattern을 multi로 제거 
   cat('\n')  
   
-  cat('processing 6 : stemDocument.......')
+  cat('processing 7 : stemDocument.......')
   if (stem == T) { 
     stemming.func <- function(Corpus.data){
+      
       require(tm)
+      
       tmp.1 <- list()
       for(i in 1:length(Corpus.data)){ tmp.1[[i]] <- unlist(str_split(as.character(content(Corpus.data)[[i]]), pattern=' ')) }
       corpus.length <- unlist(lapply(1:length(tmp.1), function(i) {length(tmp.1[[i]])}))
       corpus.length <- cumsum(corpus.length)+1
       tmp.1 <- unlist(tmp.1)
+      tmp.1 <- tmp.1[!tmp.1 %in% '']
       corpus.2 <- Corpus(VectorSource(tmp.1))
       corpus.2 <- tm_map(corpus.2, stemDocument)
       corpus.2 <- tm_map(corpus.2, content_transformer(stemCompletion), dictionary=tmp.1, type='prevalent')
@@ -92,7 +104,7 @@ cleanCorpus <- function(data, lower=F, removeP=T, removeWS=F, removeSW=F, multip
   }
   cat('\n')
   
-  cat('processing 7 : removeNumbers......')
+  cat('processing 8 : removeNumbers......')
   if(removeN==T){ my.corpus <- tm_map(my.corpus, removeNumbers)}                             # ..... 숫자 제거
   cat('\n')
   
