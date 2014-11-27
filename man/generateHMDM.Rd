@@ -16,4 +16,7 @@ data frame (row : Document , column : Dictionary Term)
 \description{
 Generate HMDM(Hierarchical Multi-Dictionary term Matrix) function
 }
+\examples{
+data.freq <- generateHMDM(data.corpus, dict=hmd)
+}
 

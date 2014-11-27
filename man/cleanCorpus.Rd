@@ -24,4 +24,8 @@ cleanCorpus(data, lower = F, removeP = T, removeWS = F, removeSW = F,
 \description{
 Convert data data frame to Corpus
 }
+\examples{
+stopwords=c('from','and','for','was','had','ncp','will','its','required','unit','require')
+cleanCorpus(VoC.text, stem=T, mystopwords=stopwords)
+}
 

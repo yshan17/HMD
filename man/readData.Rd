@@ -18,4 +18,10 @@ data file
 \description{
 Use data folder path, read Data function
 }
+\examples{
+# Two csv files exists 'C:/User/USER/Desktop/data' path
+# One data is 'data1', the other is 'data2'
+
+readData(data.name=c('data1','data2'), folder.path='C:/User/USER/Desktop/data', pattern='*.csv')
+}
 

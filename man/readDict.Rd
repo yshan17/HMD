@@ -14,4 +14,8 @@ HMD class object
 \description{
 Read a dictionary csv file. Convert data fram to HMD class
 }
+\examples{
+# dic csv file exists working directory
+hmd <- readDict(dict.path='./dic.csv')
+}
 
