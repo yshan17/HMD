@@ -4,6 +4,8 @@
 #' @param corpus object of class Corpus
 #' @param dict object of class HMD
 #' @return data frame (row : Document , column : Dictionary Term)
+#' @examples
+#' data.freq <- generateHMDM(data.corpus, dict=hmd)
 generateHMDM <- function(corpus, dict, ...){
   
   ## Description : Corpus형태의 데이터와 사용자 Heirarchical multi-dictionary를 이용하여, 
@@ -14,6 +16,9 @@ generateHMDM <- function(corpus, dict, ...){
   # dict :  첫 번째 열이 단어로 이루어진 데이터프레임 형식의 사용자 dictionary.
   
   require(RWeka)
+  require(tm)
+  require(stringr)
+  
   BigramTokenizer <- function(x, min=1, max=10) NGramTokenizer(x, Weka_control(min = min, max=max))
   ## Description : tokenize function in 'RWeka' package
   #
@@ -36,9 +41,7 @@ generateHMDM <- function(corpus, dict, ...){
   }
   vec.levels <- data.frame(Vec=as.character(dict[,1]), Levels=level)
   level.dict <- unique(data.frame(dict[,2:ncol(dict)], term=level))
-  #
-  #assign('level.dict', level.dict, pos=1)
-  
+    
   # DocumentTermMatrix 생성
   # rownames은 같은 이름으로 지정이 불가하여 DTM을 사용
   tmp.dtm <- DocumentTermMatrix(corpus, control=list(tokenize=BigramTokenizer, dictionary=vec.levels$Vec))
