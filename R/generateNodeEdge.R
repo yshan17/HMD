@@ -1,4 +1,4 @@
-#' generateNodeEdge
+#' generateNE
 #' 
 #' @description Create Node and Edge object from apriroi function
 #' 
@@ -11,8 +11,8 @@
 #' @return Node and Edge object(data.frame) from apriori function
 #' @examples
 #' # Set support value 0.01
-#' generateNodeEdge(HMDM.data=data.freq, rules.supp=0.01)
-generateNodeEdge <- function(HMDM.data, rules.supp=0.1, rules.conf=0.8, rules.minlen=2, rules.maxlen=2){
+#' generateNE(HMDM.data=data.freq, rules.supp=0.01)
+generateNE <- function(HMDM.data, rules.supp=0.1, rules.conf=0.8, rules.minlen=2, rules.maxlen=2){
   
   require(arules)
   
