@@ -3,10 +3,10 @@
 \alias{splitLevel}
 \title{splitLevel}
 \usage{
-splitLevel(freq.data)
+splitLevel(HMDM.data)
 }
 \arguments{
-\item{freq.data}{data by generateHMDM function}
+\item{HMDM.data}{data by generateHMDM function}
 }
 \value{
 splited level
@@ -16,6 +16,6 @@ HMDM(Hierarchical Multi-Dictionary term Matrix) level split function
 }
 \examples{
 #
-sony.level <- split(freq.data=data.freq)
+sony.level <- split(HMDM.data=data.freq)
 }
 

@@ -2,18 +2,18 @@
 #' 
 #' @description Convert data data frame to Corpus
 #' @param data data for cleansing, data frame or character vector
-#' @param lower a logical value indicating whether the character vectors translate characters in particular from upper to lower case or vice versa.
-#' @param removeP a logical value indicating whether the character vectors remove all punctuations.
-#' @param removeWS a logical value indicating whether the character vectors remove all white spaces.
-#' @param multipattern a character vector indicating the character vectors remove pattern.
-#' @param stem a logical value indicating whether the character vectors stemming characters.
-#' @param removeN a logical value indicating whether the character vectors remove all numbers.
+#' @param lower a logical value indicating whether the character vectors translate characters in particular from upper to lower case or vice versa. (default : T)
+#' @param removeP a logical value indicating whether the character vectors remove all punctuations. (default : T)
+#' @param removeWS a logical value indicating whether the character vectors remove all white spaces. (default : F)
+#' @param multipattern a character vector indicating the character vectors remove pattern. (default : NULL)
+#' @param stem a logical value indicating whether the character vectors stemming characters. (default : F)
+#' @param removeN a logical value indicating whether the character vectors remove all numbers. (default : T)
 #' @export data file
 #' @examples
 #' 
 #' stopwords=c('from','and','for','was','had','ncp','will','its','required','unit','require')
 #' cleanCorpus(VoC.text, stem=T, mystopwords=stopwords)
-cleanCorpus <- function(data, lower=F, removeP=T, removeWS=F, removeSW=F, multipattern=NULL, stem=F, removeN=F){
+cleanCorpus <- function(data, lower=T, removeP=T, removeWS=F, removeSW=F, multipattern=NULL, stem=F, removeN=F){
   
   ## Description  : 데이터를 원하는 방법으로 전처리하여 Corpus형태의 데이터로 반환해주는 함수
   #

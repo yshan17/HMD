@@ -3,23 +3,23 @@
 \alias{cleanCorpus}
 \title{cleanCorpus}
 \usage{
-cleanCorpus(data, lower = F, removeP = T, removeWS = F, removeSW = F,
+cleanCorpus(data, lower = T, removeP = T, removeWS = F, removeSW = F,
   multipattern = NULL, stem = F, removeN = F)
 }
 \arguments{
 \item{data}{data for cleansing, data frame or character vector}
 
-\item{lower}{a logical value indicating whether the character vectors translate characters in particular from upper to lower case or vice versa.}
+\item{lower}{a logical value indicating whether the character vectors translate characters in particular from upper to lower case or vice versa. (default : T)}
 
-\item{removeP}{a logical value indicating whether the character vectors remove all punctuations.}
+\item{removeP}{a logical value indicating whether the character vectors remove all punctuations. (default : T)}
 
-\item{removeWS}{a logical value indicating whether the character vectors remove all white spaces.}
+\item{removeWS}{a logical value indicating whether the character vectors remove all white spaces. (default : F)}
 
-\item{multipattern}{a character vector indicating the character vectors remove pattern.}
+\item{multipattern}{a character vector indicating the character vectors remove pattern. (default : NULL)}
 
-\item{stem}{a logical value indicating whether the character vectors stemming characters.}
+\item{stem}{a logical value indicating whether the character vectors stemming characters. (default : F)}
 
-\item{removeN}{a logical value indicating whether the character vectors remove all numbers.}
+\item{removeN}{a logical value indicating whether the character vectors remove all numbers. (default : T)}
 }
 \description{
 Convert data data frame to Corpus
