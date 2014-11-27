@@ -1,10 +1,9 @@
 Package: HMD
+Type: Package
 Title: Hierarchical Multi-Dictionary
 Version: 0.1
 Author: Yeeseul Han <han.lolove17@gmail.com>
 Maintainer: Yeeseul Han <han.lolove17@gmail.com>
 Description: On the study of Hierarchical Multi-Dictionary for sentence
     awareness
-Depends:
-    R (>= 3.1.2)
 License: MIT
